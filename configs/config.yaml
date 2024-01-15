@@ -1,0 +1,40 @@
+service:
+  name: simple-gateway
+  port: 3023
+
+db:
+  transaction:
+    database: "local"
+    host: "localhost"
+    port: 3306
+    username: root
+    password: root
+    timeout: 1h
+    connection:
+      maxidle: 2
+      maxopen: 20
+
+
+integration:
+  prompay:
+    baseurl: https://634e286bf34e1ed8268480f2.mockapi.io/api/v1/testN
+    name: prompay
+    apis:
+      verification:
+        uri: /verifi
+        method: POST
+        name: verification
+      confirmation:
+        uri: /confirmation
+        method: POST
+        name: confirmation
+  notification:
+    baseurl: http://notification.service:8080
+    name: notification
+    apis:
+      noti:
+        uri: /noti
+        method: POST
+        name: noti
+
+
